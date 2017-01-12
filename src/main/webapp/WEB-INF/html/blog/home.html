@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/home :: head">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "layout/home" at runtime.                                               -->
+    <!-- ============================================================================ -->
+</head>
+
+<body>
+
+<div th:replace="layout/home :: menu" class="navbar navbar-inverse navbar-fixed-top">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "layout/home" at runtime.                                               -->
+    <!-- ============================================================================ -->
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+
+
+            <div th:replace="layout/home :: welcomeMessage" class="page-header">
+                <!-- ============================================================================ -->
+                <!-- This content is only used for static prototyping purposes (natural templates)-->
+                <!-- and is therefore entirely optional, as this markup fragment will be included -->
+                <!-- from "layout/home" at runtime.                                               -->
+                <!-- ============================================================================ -->
+            </div>
+
+            <th:block th:each="iteration : ${iterations.content}">
+                <article>
+                    <h2><a th:href="@{/}" th:text="${iteration.name}">The
+                        Route of All Evil</a></h2>
+                    <p>
+                        <small>
+                            Category : <a
+                                th:href="@{/}"
+                                th:text="${iteration.category.name}">Nature</a>,
+                            by <a th:href="@{/}"
+                                  th:text="${iteration.user.username}">John Doe</a>
+                            on <em>Aug 24th
+                            2013</em>
+                        </small>
+                    </p>
+                    <p th:utext="${{#strings.abbreviate(iteration.content,450)}}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, numquam, praesentium, porro
+                        eius facilis aperiam deleniti veritatis explicabo magni eaque dolorem voluptatum necessitatibus
+                        beatae delectus quia itaque perferendis. Necessitatibus, tempore. Fugit, sit, sapiente
+                        asperiores illo iste laboriosam maiores voluptas laborum tempore quibusdam consequatur nihil
+                        itaque earum recusandae illum deserunt sequi. Fugiat, facere provident nobis ratione id in quos
+                        ex cum...</p>
+                    <p class="text-right"><a
+                            class="btn btn-primary" th:href="@{/}">Read
+                        more...</a></p>
+                </article>
+                <hr>
+            </th:block>
+
+
+            <!-- Pagination Bar -->
+            <ul class="pagination" th:if="${iterations.totalPages &gt; 1}">
+                <li><span
+                        th:if="${iterations.firstPage}">← First</span>
+                    <a th:if="${not iterations.firstPage}" th:href="@{${iterations.url}(page=1)}">←
+                        First</a></li>
+                <li><span th:if="${not iterations.hasPreviousPage}">«</span>
+                    <a th:if="${iterations.hasPreviousPage}" th:href="@{${iterations.url}(page=${iterations.number-1})}">«</a></li>
+                <th:block th:each="item : ${iterations.items}">
+                    <li><span th:if="${item.current}" th:text="${item.number}">1</span>
+                        <a th:if="${not item.current}"
+                           th:href="@{${iterations.url}(page=${item.number})}"><span th:text="${item.number}">1</span></a>
+                    </li>
+                </th:block>
+                <li><span th:if="${not iterations.hasNextPage}">»</span>
+                    <a th:if="${iterations.hasNextPage}" th:href="@{${iterations.url}(page=${iterations.number+1})}"
+                       title="Go to next page">»</a></li>
+                <li><span
+                        th:if="${iterations.lastPage}">Last →</span>
+                    <a th:if="${not iterations.lastPage}"
+                       th:href="@{${iterations.url}(page=${iterations.totalPages})}">Last →</a></li>
+            </ul>
+            <!-- end Pagination Bar -->
+        </div>
+
+        <div th:replace="layout/home :: sidebar" class="col-md-4 sidebar">
+            <!-- ============================================================================ -->
+            <!-- This content is only used for static prototyping purposes (natural templates)-->
+            <!-- and is therefore entirely optional, as this markup fragment will be included -->
+            <!-- from "layout/home" at runtime.                                               -->
+            <!-- ============================================================================ -->
+        </div><!-- /.sidebar -->
+    </div>
+
+</div><!-- /.container -->
+
+</body>
+</html>

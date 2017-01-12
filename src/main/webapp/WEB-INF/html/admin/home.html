@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/home :: head">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "layout/home" at runtime.                                               -->
+    <!-- ============================================================================ -->
+</head>
+<body>
+
+<div th:replace="layout/home :: menu">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "layout/home" at runtime.                                               -->
+    <!-- ============================================================================ -->
+</div>
+
+<div class="container">
+
+    <h1>Manage posts</h1>
+
+    <p><a th:href="${(#mvc.url('AC#newPost')).build()}" class="btn btn-primary">Add a new post</a></p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Publication date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="iteration : ${iterations.content}">
+            <td th:text="${iteration.id}">3</td>
+            <td th:text="${iteration.name}">The Route of All Evil</td>
+            <td th:text="${iteration.created}">09/24/2013 10:00</td>
+            <td th:text="${iteration.category.name}">Category #1</td>
+            <td>
+                <a th:href="${(#mvc.url('AC#editPost').arg(1, iteration.id)).build()}"
+                   class="btn btn-primary">Edit</a>
+                <form th:method="delete" th:action="${(#mvc.url('AC#deletePost').arg(1, iteration.id)).build()}"
+                      style="display:inline;">
+                    <input type="submit" name="delete" value="undo" class="btn btn-danger"
+                           onclick="return confirm('Are you sure ?')"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination Bar -->
+    <ul class="pagination" th:if="${iterations.totalPages &gt; 1}">
+        <li th:classappend="${iterations.hasPreviousPage}? '' : 'disabled'"><span
+                th:if="${not iterations.hasPreviousPage}">Previous</span>
+            <a th:if="${iterations.hasPreviousPage}" th:href="@{${iterations.url}(page=${iterations.number-1})}">«</a>
+        </li>
+        <th:block th:each="item : ${iterations.items}">
+            <li><span th:if="${item.current}" th:text="${item.number}">1</span>
+                <a th:if="${not item.current}"
+                   th:href="@{${iterations.url}(page=${item.number})}"><span th:text="${item.number}">1</span></a>
+            </li>
+        </th:block>
+        <li th:classappend="${iterations.hasNextPage}? '' : 'disabled'"><span
+                th:if="${not iterations.hasNextPage}">Next</span>
+            <a th:if="${iterations.hasNextPage}" th:href="@{${iterations.url}(page=${iterations.number+1})}"
+               title="Go to next page">Next</a></li>
+    </ul>
+    <!-- end Pagination Bar -->
+
+
+</div> <!-- /container -->
+</body>
+</html>

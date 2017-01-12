@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/home :: head">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "layout/home" at runtime.                                               -->
+    <!-- ============================================================================ -->
+</head>
+
+<body>
+
+<div th:replace="layout/home :: menu" class="navbar navbar-inverse navbar-fixed-top">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "layout/home" at runtime.                                               -->
+    <!-- ============================================================================ -->
+</div>
+
+<div class="container">
+
+    <form class="form-signin" method="post" th:action="@{/login}">
+        <h4 class="form-signin-heading">Please sign in</h4>
+        <input type="text" name="username" class="form-control" placeholder="Email address" autofocus>
+        <input type="password" name="password" class="form-control" placeholder="Password">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+</body>
+</html>
