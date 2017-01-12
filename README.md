@@ -8,10 +8,10 @@ Template example for Spring 4 MVC + JSP View with pure Java Configuration (no XM
 
 ###2. To Run this project locally
 ```shell
-$ git clone https://github.com/viralpatel/spring4-mvc-example
+$ git clone https://github.com/yvau/blogMvc
 $ mvn tomcat7:run
 ```
-Access ```http://localhost:8080/spring4/hello```
+Access ```http://localhost:8080/```
 
 ###3. To import this project in Eclipse IDE
 1. ```$ mvn eclipse:eclipse```
@@ -20,4 +20,4 @@ Access ```http://localhost:8080/spring4/hello```
 
 
 ###3. Project Demo
-Please refer to this article [Spring 4 MVC Hello World](http://viralpatel.net/blogs/spring-4-mvc-tutorial-maven-example/)
+
